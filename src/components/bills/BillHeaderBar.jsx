@@ -1,0 +1,18 @@
+export const BillHeaderBar = ({ monthSetter, monthArray }) => {
+  const currentDate = new Date();
+  currentDate.setMonth(currentDate.getMonth() + monthSetter);
+  const monthAndYear = currentDate.toLocaleString("en-US", {
+    month: "long",
+    year: "numeric",
+  });
+  const totalAmountDue = monthArray?.reduce(
+    (accumulator, bill) => accumulator + bill.amountDue,
+    0
+  );
+  return (
+    <div className="bill-header-bar">
+      <div>{monthAndYear}</div>
+      <div>${totalAmountDue}</div>
+    </div>
+  );
+};
