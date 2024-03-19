@@ -1,0 +1,66 @@
+.navbar {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  box-shadow: 0px 3px 4px lightgray;
+  width: 100vw;
+  margin: 0;
+  padding: 1.75rem;
+  justify-content: center;
+}
+.navbar-item {
+  list-style-type: none;
+  flex-basis: 5%;
+  text-align: center;
+  margin-right: 4%;
+}
+
+.navbar-link {
+  text-decoration: none;
+  color: #64686f;
+  font-family: "Exo 2", sans-serif;
+  font-weight: 350;
+  font-size: 1.1rem;
+}
+
+.navbar-logout {
+  margin-left: 70%;
+}
+
+@media screen and (min-width: 800px) {
+  .navbar-logout {
+    margin-left: 65%;
+  }
+  .navbar-item {
+    margin-right: 6%;
+  }
+}
+
+@media screen and (min-width: 500px) and (max-width: 800px) {
+  .navbar-item {
+    flex-basis: 7%;
+    margin-right: 8%;
+  }
+  .navbar-link {
+    font-size: 1em;
+  }
+  .navbar-logout {
+    margin-left: 50%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .navbar-logout {
+    margin-left: 35%;
+  }
+  .navbar-item {
+    /* flex-basis: 0%; */
+    margin-right: 9%;
+  }
+}
+
+@media screen and (max-width: 280px) {
+  .navbar-link {
+    font-size: 0.95rem;
+  }
+}

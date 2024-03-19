@@ -1,25 +1,56 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { getBillByBillId } from "../../services/billsService";
+import { useParams, useNavigate } from "react-router-dom";
+import {
+  deletBill,
+  getBillByBillId,
+  updateBill,
+} from "../../services/billsService";
 import { Link } from "react-router-dom";
 import { BillOptionsDropDown } from "./BillOptionsDropDown";
+import "./Forms.css";
 
-export const BillDetails = ({ billOption }) => {
+export const BillDetails = () => {
   const { billId } = useParams();
   const [bill, setBill] = useState();
   const [editBill, setEditBill] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     getBillByBillId(billId).then((bilObj) => {
       setBill(bilObj);
     });
   }, [billId]);
-  const date = new Date(bill?.dueDate);
-  const dueDate = date.toLocaleString("en-US", {
-    month: "long",
-    day: "numeric",
-    year: "numeric",
-  });
+
+  const handleInputChange = (event) => {
+    const stateCopy = { ...bill };
+    stateCopy[event.target.name] = event.target.value;
+    setBill(stateCopy);
+  };
+
+  const handleSave = (event) => {
+    event.preventDefault();
+    const updatedBill = {
+      id: billId,
+      amountDue: parseInt(bill.amountDue),
+      dueDate: bill.dueDate,
+      repeatBillId: parseInt(bill.repeatBillId),
+      accountId: bill.accountId,
+      paid: bill.paid,
+    };
+    updateBill(updatedBill).then(() => {
+      navigate("/bills");
+    });
+  };
+
+  const handleDelete = (event) => {
+    event.preventDefault();
+    if (window.confirm("Please confirm that you want to delete this bill.")) {
+      deletBill(bill).then(() => {
+        navigate("/bills");
+      });
+    }
+  };
   return (
     <form className="edit-bill">
       {!editBill ? <h2>Bill Details</h2> : <h2>Edit Bill</h2>}
@@ -44,7 +75,9 @@ export const BillDetails = ({ billOption }) => {
                 </button>
               </Link>
             ) : (
-              <button className="form-btn=-secondary">Save</button>
+              <button className="form-btn-secondary" onClick={handleSave}>
+                Save
+              </button>
             )}
           </div>
         </div>
@@ -52,38 +85,42 @@ export const BillDetails = ({ billOption }) => {
 
       <fieldset>
         <div className="form-group">
-          <label>Amount Due</label>
+          <label className="form-label">Amount Due</label>
           {!editBill ? (
             <input
               type="number"
               className="form-control"
               readOnly
-              value={bill?.amountDue}
+              value={bill?.amountDue ? bill?.amountDue : ``}
             />
           ) : (
             <input
-              type="number"
+              type="text"
+              name="amountDue"
               className="form-control"
-              defaultValue={bill?.amountDue}
+              value={bill?.amountDue ? bill?.amountDue : ``}
+              onChange={handleInputChange}
             />
           )}
         </div>
       </fieldset>
       <fieldset>
         <div className="form-group">
-          <label>Due Date</label>
+          <label className="form-label">Due Date</label>
           {!editBill ? (
             <input
               type="date"
               className="form-control"
               readOnly
-              value={bill?.dueDate}
+              value={bill?.dueDate ? bill?.dueDate : ``}
             />
           ) : (
             <input
               type="date"
+              name="dueDate"
               className="form-control"
-              defaultValue={bill?.dueDate}
+              value={bill?.dueDate ? bill?.dueDate : ``}
+              onChange={handleInputChange}
             />
           )}
         </div>
@@ -91,21 +128,28 @@ export const BillDetails = ({ billOption }) => {
       {!editBill ? (
         <fieldset>
           <div className="form-group">
-            <label> Repeat Bill Every</label>
+            <label className="form-label"> Repeat Bill Every</label>
             <input
               type="text"
               className="form-control"
               readOnly
-              value={bill?.repeatBill?.name}
+              value={bill?.repeatBill?.name ? bill?.repeatBill?.name : ``}
             />
           </div>
         </fieldset>
       ) : (
         <fieldset>
           <div className="form-group">
-            <label>Repeat Bill Every</label>
-            <select name="repeat-bill">
-              <option value={bill?.repeatBill?.id} selected disabled hidden>
+            <label className="form-label">Repeat Bill Every</label>
+            <select
+              className="form-control"
+              name="repeatBillId"
+              onChange={handleInputChange}
+            >
+              <option
+                value={bill?.repeatBill?.id ? bill?.repeatBill?.id : ``}
+                hidden
+              >
                 {bill?.repeatBill?.name}
               </option>
               <BillOptionsDropDown />
@@ -114,14 +158,14 @@ export const BillDetails = ({ billOption }) => {
         </fieldset>
       )}
 
-      {editBill ? (
+      {editBill && (
         <fieldset>
           <div className="form-group">
-            <button className="form-btn-primary">Delete Account </button>
+            <button className="form-btn-primary" onClick={handleDelete}>
+              Delete Bill
+            </button>
           </div>
         </fieldset>
-      ) : (
-        ""
       )}
     </form>
   );
