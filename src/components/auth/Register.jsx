@@ -21,7 +21,7 @@ export const Register = (props) => {
           })
         );
 
-        navigate("/");
+        navigate("/bills");
       }
     });
   };
@@ -45,9 +45,8 @@ export const Register = (props) => {
 
   return (
     <main>
-      <form className="form-login" onSubmit={handleRegister}>
-        <h1>Bill Tracker</h1>
-        <h2>Create an Bill Tracker Account</h2>
+      <form className="form-login register-login" onSubmit={handleRegister}>
+        <h2>Create your account</h2>
         <fieldset>
           <div className="form-group">
             <input
@@ -76,12 +75,14 @@ export const Register = (props) => {
         <fieldset>
           <div className="form-group">
             <button className="login-btn btn-info" type="submit">
-              Register
+              Sign up
             </button>
           </div>
         </fieldset>
         <section>
-          Already have an account? <Link to="/login">Sign In</Link>
+          <Link className="register-link register-link-secondary" to="/login">
+            Log in instead
+          </Link>
         </section>
       </form>
     </main>

@@ -3,10 +3,11 @@ import { setBillAsPaid } from "../../services/billsService";
 
 export const Bill = ({ bill, getAndSetBills }) => {
   const dueDate = new Date(bill.dueDate);
-  const date = dueDate.toLocaleString("en-US", {
+  const date = dueDate.toLocaleDateString("en-US", {
     weekday: "short",
     month: "short",
     day: "numeric",
+    timeZone: "UTC",
   });
 
   const currentDate = new Date();
@@ -30,21 +31,35 @@ export const Bill = ({ bill, getAndSetBills }) => {
 
   return (
     <section className="bill">
-      <input type="checkbox" id="bill-checkbox" onChange={handleMarkAsPaid} />
-      <div className="bill-info">
-        {daysDifference === 1 ? (
-          <div>{daysDifference} day</div>
-        ) : (
-          <div>{daysDifference} days</div>
-        )}
-        <div className="bill-info-section">
-          <div>{bill.account?.accountName}</div>
-          <div>{date}</div>
+      <button id="bill-checkbox" onClick={handleMarkAsPaid}>
+        <i className="material-icons">check_circle</i>
+      </button>
+      {/* <div className="bill-info"> */}
+      {daysDifference === 1 ? (
+        <div className="bill-days-info">
+          {daysDifference}
+          <div>day</div>
+        </div>
+      ) : (
+        <div className="bill-days-info">
+          {daysDifference}
+          <div>days</div>
+        </div>
+      )}
+      <div className="bill-info-section">
+        <div className="bill-info-flex">
+          <div>
+            <div className="bill-account-name">{bill.account?.accountName}</div>
+          </div>
+          <div className="bill-due-date">{date}</div>
         </div>
         <div>${bill.amountDue}</div>
       </div>
+      {/* </div> */}
       <Link to={`/bills/${bill.id}`}>
-        <button className="bill-edit-bn">View</button>
+        <button className="bill-edit-bn">
+          <i className="material-icons">visibility</i>
+        </button>
       </Link>
     </section>
   );

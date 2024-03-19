@@ -1,0 +1,99 @@
+.bill-header-bar {
+  background-color: #c0e1eb;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
+  width: 800px;
+  height: 15px;
+  padding: 10px;
+  box-shadow: 0px 3px 4px lightgray;
+  margin-bottom: 5px;
+}
+
+.bill-list-header {
+  margin: auto;
+}
+
+.bills-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 3%;
+}
+.add-bill-btn {
+  margin-left: 71%;
+  margin-bottom: 2%;
+  margin-top: 2%;
+  border: none;
+  background: none;
+}
+
+.add-bill-btn:hover {
+  color: #2e8d5e;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 200, "opsz" 24;
+}
+
+.bills {
+  display: flex;
+  flex-direction: column;
+}
+
+.bill {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 22.4%;
+  margin-bottom: 9px;
+}
+
+#bill-checkbox {
+  width: 80px;
+  background: none;
+  border: none;
+  margin-right: 7.5px;
+}
+
+#bill-checkbox:hover {
+  color: #2e8d5e;
+}
+.bill-edit-bn {
+  margin-left: 35px;
+  background: none;
+  border: none;
+}
+
+.bill-info-section {
+  width: 727.9px;
+  height: 50px;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0px 3px 4px lightgray;
+}
+
+.bill-days-info {
+  width: 50px;
+  height: 50px;
+  padding: 10px;
+  box-shadow: 0px 3px 4px lightgray;
+  background-color: #38a870;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+/* .bill-info-flex {
+  display: flex;
+  flex-direction: column;
+} */
+
+.bill-account-name {
+  margin-bottom: 12px;
+}
+.bill-due-date {
+  color: darkblue;
+}

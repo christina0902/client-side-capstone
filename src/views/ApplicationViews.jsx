@@ -29,7 +29,10 @@ export const ApplicationViews = () => {
       >
         <Route path="bills">
           <Route index element={<BillList currentUser={currentUser} />} />
-          <Route path="createNewBill" element={<CreateNewBillForm />} />
+          <Route
+            path="createNewBill"
+            element={<CreateNewBillForm currentUser={currentUser} />}
+          />
           <Route path=":billId" element={<BillDetails />} />
         </Route>
         <Route path="accounts">

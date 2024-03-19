@@ -27,6 +27,12 @@ export const BillList = ({ currentUser }) => {
     setFilterBillsByUser(foundBills);
   }, [allBills, currentUser]);
 
+  // useEffect(() => {
+  //   const filterRecurringBills = allBills.filter((bill) => {
+  //     const dueDate = bill.dueDate;
+  //     const recurringBills = bill.repeatBillId > 1;
+  //   });
+  // }, [allBills]);
   useEffect(() => {
     const filteredMonthsObj = {};
 
@@ -80,10 +86,10 @@ export const BillList = ({ currentUser }) => {
   }, [allBills, filterBillsByUser]);
 
   return (
-    <div className="bills-contaienr">
-      <h2>Upcoming Bills</h2>
+    <div className="bills-container">
+      <h2 className="bill-list-header">Upcoming Bills</h2>
       <Link to="/bills/createNewBill">
-        <button className="add-bill-btn">Add</button>
+        <button className="add-bill-btn material-symbols-outlined">Add</button>
       </Link>
       <div className="bills">
         <div className="bills-month-container">

@@ -22,7 +22,7 @@ export const AccountsList = ({ currentUser }) => {
 
   return (
     <div className="accounts-container">
-      <h2>Accounts</h2>
+      <h2 className="accounts-header">Accounts</h2>
       <article className="accounts">
         {filterAccountsByUser.map((account) => {
           return <Account key={account.id} account={account} />;

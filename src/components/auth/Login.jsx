@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { getUserByEmail } from "../../services/userService";
-
+import "./Login.css";
 export const Login = () => {
   const [email, setEmail] = useState("christinam1215@yahoo.com");
   const navigate = useNavigate();
@@ -27,12 +27,14 @@ export const Login = () => {
   };
 
   return (
-    <main className="container-login">
-      <section>
+    <main className="login-flex">
+      <section className="container-login">
         <form className="form-login" onSubmit={handleLogin}>
-          <h1>Bill Tracker</h1>
-          <h2>Sign in</h2>
+          <h2>Log in to Bill Tracker</h2>
           <fieldset>
+            <div className="form-group">
+              <span className="form-label">Email</span>
+            </div>
             <div className="form-group">
               <input
                 type="email"
@@ -48,15 +50,23 @@ export const Login = () => {
           <fieldset>
             <div className="form-group">
               <button className="login-btn btn-info" type="submit">
-                Sign in
+                Log in
               </button>
             </div>
           </fieldset>
         </form>
+        <section>
+          <Link className="register-link" to="/register">
+            Create an account
+          </Link>
+        </section>
       </section>
-      <section>
-        New to Bill Tracker?
-        <Link to="/register">Create an account.</Link>
+      <section className="login-img-container">
+        <img
+          className="login-img"
+          src="src/images/loginImg.jpg"
+          alt="photo displaying coins and bills"
+        />
       </section>
     </main>
   );

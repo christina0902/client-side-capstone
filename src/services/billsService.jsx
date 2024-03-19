@@ -24,3 +24,29 @@ export const getRepeatBillOptions = async () => {
     res.json()
   );
 };
+
+export const updateBill = async (bill) => {
+  return await fetch(`http://localhost:8088/bills/${bill.id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(bill),
+  });
+};
+
+export const deletBill = (bill) => {
+  return fetch(`http://localhost:8088/bills/${bill.id}`, {
+    method: "DELETE",
+  });
+};
+
+export const createBill = async (bill) => {
+  return await fetch("http://localhost:8088/bills", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(bill),
+  }).then((res) => res.json());
+};

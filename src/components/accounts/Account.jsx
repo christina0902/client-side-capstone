@@ -6,7 +6,9 @@ export const Account = ({ account }) => {
       <div className="account-info">{account.accountName}</div>
       <div className="ticket-btn-container">
         <Link to={`/accounts/${account.id}`}>
-          <button>View</button>
+          <button className="view-account-btn">
+            <i className="material-icons">visibility</i>
+          </button>
         </Link>
       </div>
     </section>
