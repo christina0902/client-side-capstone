@@ -6,7 +6,7 @@ import { createBill } from "../../services/billsService";
 
 export const CreateNewBillForm = ({ currentUser }) => {
   const [newBill, setNewBill] = useState({
-    repeatBillId: 0,
+    repeatBillId: 1,
     amountDue: 0,
     dueDate: new Date().toISOString().split("T")[0],
   });
