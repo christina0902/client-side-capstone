@@ -64,7 +64,7 @@ export const Login = () => {
       <section className="login-img-container">
         <img
           className="login-img"
-          src="src/images/loginImg.jpg"
+          src="src/images/login-img.jpg"
           alt="photo displaying coins and bills"
         />
       </section>

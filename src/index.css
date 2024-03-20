@@ -67,7 +67,7 @@ button:focus-visible {
   }
 } */
 body {
-  overflow: scroll;
+  overflow-x: hidden;
   margin: 0;
   min-height: 100vh;
   font-family: "Exo 2", sans-serif;

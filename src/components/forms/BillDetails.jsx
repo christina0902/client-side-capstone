@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import {
-  deletBill,
+  deleteBill,
   getBillByBillId,
   updateBill,
 } from "../../services/billsService";
@@ -17,8 +17,8 @@ export const BillDetails = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    getBillByBillId(billId).then((bilObj) => {
-      setBill(bilObj);
+    getBillByBillId(billId).then((billObj) => {
+      setBill(billObj);
     });
   }, [billId]);
 
@@ -42,11 +42,11 @@ export const BillDetails = () => {
       navigate("/bills");
     });
   };
-
   const handleDelete = (event) => {
+    debugger;
     event.preventDefault();
     if (window.confirm("Please confirm that you want to delete this bill.")) {
-      deletBill(bill).then(() => {
+      deleteBill(parseInt(billId)).then(() => {
         navigate("/bills");
       });
     }
@@ -67,7 +67,8 @@ export const BillDetails = () => {
               <Link>
                 <button
                   className="form-btn-secondary"
-                  onClick={() => {
+                  onClick={(event) => {
+                    event.preventDefault();
                     setEditBill(true);
                   }}
                 >

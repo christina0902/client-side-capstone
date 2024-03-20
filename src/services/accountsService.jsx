@@ -20,8 +20,8 @@ export const updateAccount = (account) => {
   });
 };
 
-export const deleteAccount = (account) => {
-  return fetch(`http://localhost:8088/accounts/${account.id}`, {
+export const deleteAccount = (accountId) => {
+  return fetch(`http://localhost:8088/accounts/${accountId}`, {
     method: "DELETE",
   });
 };
