@@ -218,7 +218,7 @@ export const BillList = ({ currentUser }) => {
                   .map((bill) => {
                     return (
                       <Bill
-                        key={bill.id}
+                        key={`${bill.id} ${bill.dueDate}`}
                         bill={bill}
                         getAndSetBills={getAndSetBills}
                       />
@@ -229,7 +229,7 @@ export const BillList = ({ currentUser }) => {
                   .map((bill) => {
                     return (
                       <Bill
-                        key={bill.id}
+                        key={`${bill.id} ${bill.dueDate}`}
                         bill={bill}
                         getAndSetBills={getAndSetBills}
                       />
@@ -250,7 +250,7 @@ export const BillList = ({ currentUser }) => {
                   .map((bill) => {
                     return (
                       <Bill
-                        key={bill.id}
+                        key={`${bill.id} ${bill.dueDate}`}
                         bill={bill}
                         getAndSetBills={getAndSetBills}
                       />
@@ -261,7 +261,7 @@ export const BillList = ({ currentUser }) => {
                   .map((bill) => {
                     return (
                       <Bill
-                        key={bill.id}
+                        key={`${bill.id} ${bill.dueDate}`}
                         bill={bill}
                         getAndSetBills={getAndSetBills}
                       />
@@ -282,7 +282,7 @@ export const BillList = ({ currentUser }) => {
                   .map((bill) => {
                     return (
                       <Bill
-                        key={bill.id}
+                        key={`${bill.id} ${bill.dueDate}`}
                         bill={bill}
                         getAndSetBills={getAndSetBills}
                       />
@@ -293,7 +293,7 @@ export const BillList = ({ currentUser }) => {
                   .map((bill) => {
                     return (
                       <Bill
-                        key={bill.id}
+                        key={`${bill.id} ${bill.dueDate}`}
                         bill={bill}
                         getAndSetBills={getAndSetBills}
                       />
