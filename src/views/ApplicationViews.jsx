@@ -6,6 +6,8 @@ import { AccountDetails } from "../components/forms/AccountDetails";
 import { useEffect, useState } from "react";
 import { BillDetails } from "../components/forms/BillDetails";
 import { CreateNewBillForm } from "../components/forms/CreateNewBillForm";
+import { CreateNewAccountForm } from "../components/forms/CreateNewAccountForm";
+
 export const ApplicationViews = () => {
   const [currentUser, setCurrentUser] = useState("");
 
@@ -38,6 +40,10 @@ export const ApplicationViews = () => {
         <Route path="accounts">
           <Route index element={<AccountsList currentUser={currentUser} />} />
           <Route path=":accountId" element={<AccountDetails />} />
+          <Route
+            path="createNewAccount"
+            element={<CreateNewAccountForm currentUser={currentUser} />}
+          />
         </Route>
       </Route>
     </Routes>

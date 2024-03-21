@@ -26,7 +26,7 @@ export const getRepeatBillOptions = async () => {
 };
 
 export const updateBill = async (bill) => {
-  return await fetch(`http://localhost:8088/bills/?id=${bill.id}`, {
+  return await fetch(`http://localhost:8088/bills/${bill.id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",

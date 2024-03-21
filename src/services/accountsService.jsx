@@ -35,3 +35,9 @@ export const createAccount = async (account) => {
     body: JSON.stringify(account),
   }).then((res) => res.json());
 };
+
+export const getAccountsByUserId = async (currentUser) => {
+  return fetch(`http://localhost:8088/accounts?userId=${currentUser}`).then(
+    (res) => res.json()
+  );
+};
