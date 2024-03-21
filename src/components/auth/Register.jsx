@@ -44,7 +44,7 @@ export const Register = (props) => {
   };
 
   return (
-    <main>
+    <main className="register-page">
       <form className="form-login register-login" onSubmit={handleRegister}>
         <h2>Create your account</h2>
         <fieldset>
@@ -79,12 +79,12 @@ export const Register = (props) => {
             </button>
           </div>
         </fieldset>
-        <section>
-          <Link className="register-link register-link-secondary" to="/login">
-            Log in instead
-          </Link>
-        </section>
       </form>
+      <section className="register-link-container">
+        <Link className="register-link register-link-secondary" to="/login">
+          Log in instead
+        </Link>
+      </section>
     </main>
   );
 };

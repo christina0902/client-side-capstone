@@ -17,7 +17,7 @@ export const BillDetails = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    getBillByBillId(billId).then((billObj) => {
+    getBillByBillId(parseInt(billId)).then((billObj) => {
       setBill(billObj);
     });
   }, [billId]);
@@ -31,7 +31,7 @@ export const BillDetails = () => {
   const handleSave = (event) => {
     event.preventDefault();
     const updatedBill = {
-      id: billId,
+      id: parseInt(billId),
       amountDue: parseInt(bill.amountDue),
       dueDate: bill.dueDate,
       repeatBillId: parseInt(bill.repeatBillId),
@@ -43,7 +43,6 @@ export const BillDetails = () => {
     });
   };
   const handleDelete = (event) => {
-    debugger;
     event.preventDefault();
     if (window.confirm("Please confirm that you want to delete this bill.")) {
       deleteBill(parseInt(billId)).then(() => {
@@ -76,7 +75,11 @@ export const BillDetails = () => {
                 </button>
               </Link>
             ) : (
-              <button className="form-btn-secondary" onClick={handleSave}>
+              <button
+                className="form-btn-secondary"
+                type="button"
+                onClick={handleSave}
+              >
                 Save
               </button>
             )}
@@ -96,7 +99,7 @@ export const BillDetails = () => {
             />
           ) : (
             <input
-              type="text"
+              type="number"
               name="amountDue"
               className="form-control"
               value={bill?.amountDue ? bill?.amountDue : ``}

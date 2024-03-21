@@ -1,18 +1,23 @@
-export const BillHeaderBar = ({ monthSetter, monthArray }) => {
+export const BillHeaderBar = ({ monthSetter, monthArray, paidBills }) => {
   const currentDate = new Date();
   currentDate.setMonth(currentDate.getMonth() + monthSetter);
   const monthAndYear = currentDate.toLocaleString("en-US", {
     month: "long",
     year: "numeric",
   });
-  const totalAmountDue = monthArray?.reduce(
-    (accumulator, bill) => accumulator + bill.amountDue,
-    0
-  );
+
+  const totalPaid = monthArray
+    ?.filter((bill) => bill.paid === true)
+    .reduce((accumulator, bill) => accumulator + bill.amountDue, 0);
+
+  const totalUnpaid = monthArray
+    ?.filter((bill) => bill.paid === false)
+    .reduce((accumulator, bill) => accumulator + bill.amountDue, 0);
+
   return (
     <div className="bill-header-bar">
       <div>{monthAndYear}</div>
-      <div>${totalAmountDue}</div>
+      {paidBills ? <div>${totalPaid}</div> : <div>${totalUnpaid}</div>}
     </div>
   );
 };

@@ -1,8 +1,9 @@
 import { Link, useNavigate } from "react-router-dom";
 import { BillOptionsDropDown } from "./BillOptionsDropDown";
 import { useState } from "react";
-import { createAccount } from "../../services/accountsService";
+// import { createAccount } from "../../services/accountsService";
 import { createBill } from "../../services/billsService";
+import { AccountOptionsDropDown } from "./AccountNameDropDown";
 
 export const CreateNewBillForm = ({ currentUser }) => {
   const [newBill, setNewBill] = useState({
@@ -20,27 +21,21 @@ export const CreateNewBillForm = ({ currentUser }) => {
 
   const handleSave = (event) => {
     event.preventDefault();
-    const Account = {
-      accountName: newBill.accountName,
-      accountNumber: newBill.accountNumber,
-      paymentUrl: newBill.paymentUrl,
-      userId: currentUser.id,
-    };
+    if (newBill.accountId > 0) {
+      const createdBill = {
+        amountDue: parseInt(newBill.amountDue),
+        dueDate: newBill.dueDate,
+        repeatBillId: parseInt(newBill.repeatBillId),
+        accountId: parseInt(newBill.accountId),
+        paid: false,
+      };
 
-    createAccount(Account).then((createdAccount) => {
-      if (createdAccount.hasOwnProperty("id")) {
-        createBill({
-          amountDue: parseInt(newBill.amountDue),
-          dueDate: newBill.dueDate,
-          repeatBillId: parseInt(newBill.repeatBillId),
-          accountId: createdAccount.id,
-          paid: false,
-        });
-
+      createBill(createdBill).then(() => {
         navigate("/bills");
-      }
-    });
+      });
+    }
   };
+
   return (
     <form className="create-bill" onSubmit={handleSave}>
       <h2>Create New Bill</h2>
@@ -61,37 +56,18 @@ export const CreateNewBillForm = ({ currentUser }) => {
       <fieldset>
         <div className="form-group">
           <label className="form-label">Account Name</label>
-          <input
-            name="accountName"
-            type="text"
+          <select
+            className="form-control"
             required
-            className="form-control"
+            name="accountId"
+            defaultValue={0}
             onChange={handleInputChange}
-          />
-        </div>
-      </fieldset>
-      <fieldset>
-        <div className="form-group">
-          <label className="form-label">Account Number</label>
-          <input
-            name="accountNumber"
-            type="text"
-            placeholder="Optional"
-            className="form-control"
-            onChange={handleInputChange}
-          />
-        </div>
-      </fieldset>
-      <fieldset>
-        <div className="form-group">
-          <label className="form-label">Payment URL </label>
-          <input
-            name="paymentUrl"
-            type="url"
-            placeholder="Optional"
-            className="form-control"
-            onChange={handleInputChange}
-          />
+          >
+            <option value={0} disabled hidden>
+              Select an account
+            </option>
+            <AccountOptionsDropDown currentUser={currentUser} />
+          </select>
         </div>
       </fieldset>
       <fieldset>
@@ -99,7 +75,7 @@ export const CreateNewBillForm = ({ currentUser }) => {
           <label className="form-label">Amount Due</label>
           <input
             name="amountDue"
-            type="text"
+            type="number"
             placeholder="0.00"
             className="form-control"
             onChange={handleInputChange}

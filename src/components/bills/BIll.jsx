@@ -20,7 +20,7 @@ export const Bill = ({ bill, getAndSetBills }) => {
       id: bill.id,
       amountDue: bill.amountDue,
       dueDate: bill.dueDate,
-      repeatBillEveryId: bill.repeatBillEveryId,
+      repeatBillId: bill.repeatBillId,
       accountId: bill.accountId,
       paid: true,
     };
@@ -31,10 +31,6 @@ export const Bill = ({ bill, getAndSetBills }) => {
 
   return (
     <section className="bill">
-      <button id="bill-checkbox" onClick={handleMarkAsPaid}>
-        <i className="material-icons">check_circle</i>
-      </button>
-      {/* <div className="bill-info"> */}
       {daysDifference === 1 ? (
         <div className="bill-days-info">
           {daysDifference}
@@ -46,21 +42,24 @@ export const Bill = ({ bill, getAndSetBills }) => {
           <div>days</div>
         </div>
       )}
+
       <div className="bill-info-section">
         <div className="bill-info-flex">
           <div>
-            <div className="bill-account-name">{bill.account?.accountName}</div>
+            <Link to={`/bills/${bill.id}`} className="bill-info-link">
+              <div className="bill-account-name">
+                {bill.account?.accountName}
+              </div>
+            </Link>
           </div>
           <div className="bill-due-date">{date}</div>
         </div>
-        <div>${bill.amountDue}</div>
+        <div className="bill-amount">${bill.amountDue}</div>
       </div>
-      {/* </div> */}
-      <Link to={`/bills/${bill.id}`}>
-        <button className="bill-edit-bn">
-          <i className="material-icons">visibility</i>
-        </button>
-      </Link>
+      {/* 
+      <button id="bill-checkbox" onClick={handleMarkAsPaid}>
+        <i className="material-icons">check_circle</i>
+      </button> */}
     </section>
   );
 };
