@@ -168,49 +168,35 @@ export const BillList = ({ currentUser }) => {
       <div className="bills-header-container">
         <div className="bills-header">
           <div>
-            {!paidBills ? (
-              <button
-                className="bills-header-btn-active"
-                onClick={() => {
-                  setPaidBills(false);
-                }}
-              >
-                Upcoming
-              </button>
-            ) : (
-              <button
-                className="bills-header-btn"
-                onClick={() => {
-                  setPaidBills(false);
-                }}
-              >
-                Upcoming
-              </button>
-            )}
+            <button
+              className={
+                !paidBills ? "bills-header-btn-active" : "bills-header-btn"
+              }
+              onClick={() => {
+                {
+                  paidBills ? setPaidBills(false) : setPaidBills(false);
+                }
+              }}
+            >
+              Upcoming
+            </button>
           </div>
+
           <div>
-            {paidBills ? (
-              <button
-                className="bills-header-btn-active"
-                onClick={() => {
-                  setPaidBills(true);
-                }}
-              >
-                Paid
-              </button>
-            ) : (
-              <button
-                className="bills-header-btn"
-                onClick={() => {
-                  setPaidBills(true);
-                }}
-              >
-                Paid
-              </button>
-            )}
+            <button
+              className={
+                paidBills ? "bills-header-btn-active" : "bills-header-btn"
+              }
+              onClick={() => {
+                {
+                  paidBills ? setPaidBills(true) : setPaidBills(true);
+                }
+              }}
+            >
+              Paid
+            </button>
           </div>
         </div>
-
         <Link to="/bills/createNewBill">
           <button className="add-bill-btn material-symbols-outlined">
             Add
