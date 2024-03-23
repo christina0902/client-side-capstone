@@ -72,11 +72,118 @@
 .register-page {
   display: flex;
   flex-direction: column;
-  margin-top: 18%;
+  margin-top: 15%;
+  height: 100%;
+  width: 100vw;
 }
 .register-link-container {
   margin: auto;
 }
 .login-header {
   margin-bottom: 80px;
+}
+
+.register-container {
+  display: flex;
+  flex-direction: column;
+}
+
+/* @media screen and (min-width: 1200px) {
+  .login-header {
+    margin-bottom: 80px;
+    font-size: 3rem;
+    margin-top: 20px;
+  }
+  .form-label {
+    font-size: 20px;
+  }
+} */
+@media screen and (min-width: 1024px) {
+  .login-header {
+    margin-bottom: 40px;
+    font-size: 2rem;
+    margin-top: 20px;
+  }
+  .form-control {
+    font-size: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 95%;
+  }
+
+  .login-btn {
+    font-size: 15px;
+    padding: 0.7rem;
+    margin-bottom: 15px;
+  }
+
+  .register-link {
+    font-size: 15px;
+  }
+
+  .form-label {
+    font-size: 15px;
+  }
+
+  .register-page {
+    margin-top: 10%;
+  }
+}
+
+@media screen and (min-width: 821px) and (max-width: 1023px) {
+  .login-header {
+    margin-bottom: 40px;
+    font-size: 2rem;
+    margin-top: 20px;
+  }
+  .login-btn {
+    margin-bottom: 15px;
+  }
+}
+
+@media screen and (min-width: 700px) {
+  .register-page {
+    margin-top: 40%;
+  }
+  .login-img {
+    display: none;
+  }
+  .form-login {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    flex-basis: 20%;
+  }
+  .login-flex {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+  }
+  .container-login {
+    margin-top: 40%;
+  }
+  .login-header {
+    margin-bottom: 80px;
+    font-size: 2.5rem;
+    margin-top: 20px;
+  }
+
+  .form-control {
+    font-size: 20px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    width: 95.5%;
+  }
+  .login-btn {
+    margin-bottom: 15px;
+    font-size: 25px;
+    padding: 0.8rem;
+  }
+}
+
+@media screen and (max-width: 500) {
+  .login-img {
+    display: none;
+  }
 }
