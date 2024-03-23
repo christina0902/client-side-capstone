@@ -10,8 +10,8 @@ export const getAccountByAccountId = async (accountId) => {
   );
 };
 
-export const updateAccount = (account) => {
-  return fetch(`http://localhost:8088/accounts/${account.id}`, {
+export const updateAccount = async (account) => {
+  return await fetch(`http://localhost:8088/accounts/${account.id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -20,8 +20,8 @@ export const updateAccount = (account) => {
   });
 };
 
-export const deleteAccount = (accountId) => {
-  return fetch(`http://localhost:8088/accounts/${accountId}`, {
+export const deleteAccount = async (accountId) => {
+  return await fetch(`http://localhost:8088/accounts/${accountId}`, {
     method: "DELETE",
   });
 };
@@ -37,7 +37,7 @@ export const createAccount = async (account) => {
 };
 
 export const getAccountsByUserId = async (currentUser) => {
-  return fetch(`http://localhost:8088/accounts?userId=${currentUser}`).then(
-    (res) => res.json()
-  );
+  return await fetch(
+    `http://localhost:8088/accounts?userId=${currentUser}`
+  ).then((res) => res.json());
 };

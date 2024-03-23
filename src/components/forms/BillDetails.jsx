@@ -11,6 +11,7 @@ import "./Forms.css";
 
 export const BillDetails = () => {
   const { billId } = useParams();
+  const { billDueDate } = useParams();
   const [bill, setBill] = useState();
   const [editBill, setEditBill] = useState(false);
 
@@ -18,9 +19,10 @@ export const BillDetails = () => {
 
   useEffect(() => {
     getBillByBillId(parseInt(billId)).then((billObj) => {
-      setBill(billObj);
+      const updatedBill = { ...billObj, dueDate: billDueDate };
+      setBill(updatedBill);
     });
-  }, [billId]);
+  }, [billDueDate, billId]);
 
   const handleInputChange = (event) => {
     const stateCopy = { ...bill };

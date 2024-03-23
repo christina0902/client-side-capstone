@@ -46,7 +46,10 @@ export const Bill = ({ bill, getAndSetBills }) => {
       <div className="bill-info-section">
         <div className="bill-info-flex">
           <div>
-            <Link to={`/bills/${bill.id}`} className="bill-info-link">
+            <Link
+              to={`/bills/${bill.id}/${bill.dueDate}`}
+              className="bill-info-link"
+            >
               <div className="bill-account-name">
                 {bill.account?.accountName}
               </div>

@@ -35,7 +35,7 @@ export const ApplicationViews = () => {
             path="createNewBill"
             element={<CreateNewBillForm currentUser={currentUser} />}
           />
-          <Route path=":billId" element={<BillDetails />} />
+          <Route path=":billId/:billDueDate" element={<BillDetails />} />
         </Route>
         <Route path="accounts">
           <Route index element={<AccountsList currentUser={currentUser} />} />

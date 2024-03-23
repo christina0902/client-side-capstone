@@ -26,7 +26,7 @@ export const BillList = ({ currentUser }) => {
             bill.repeatBillId
           );
 
-          allBillsWithRepeats.push({ ...bill, dueDate: bill.dueDate });
+          allBillsWithRepeats.push(bill);
 
           newDueDates.forEach((dueDate) => {
             const repeatedBillInstance = { ...bill, dueDate };
