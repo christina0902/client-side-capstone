@@ -45,46 +45,48 @@ export const Register = (props) => {
 
   return (
     <main className="register-page">
-      <form className="form-login register-login" onSubmit={handleRegister}>
-        <h2>Create your account</h2>
-        <fieldset>
-          <div className="form-group">
-            <input
-              onChange={updateUser}
-              type="text"
-              id="fullName"
-              className="form-control"
-              placeholder="Enter your name"
-              required
-              autoFocus
-            />
-          </div>
-        </fieldset>
-        <fieldset>
-          <div className="form-group">
-            <input
-              onChange={updateUser}
-              type="email"
-              id="email"
-              className="form-control"
-              placeholder="Email address"
-              required
-            />
-          </div>
-        </fieldset>
-        <fieldset>
-          <div className="form-group">
-            <button className="login-btn btn-info" type="submit">
-              Sign up
-            </button>
-          </div>
-        </fieldset>
-      </form>
-      <section className="register-link-container">
-        <Link className="register-link register-link-secondary" to="/login">
-          Log in instead
-        </Link>
-      </section>
+      <div className="register-container">
+        <form className="form-login register-login" onSubmit={handleRegister}>
+          <h2 className="login-header">Create your account</h2>
+          <fieldset>
+            <div className="form-group">
+              <input
+                onChange={updateUser}
+                type="text"
+                id="fullName"
+                className="form-control"
+                placeholder="Enter your name"
+                required
+                autoFocus
+              />
+            </div>
+          </fieldset>
+          <fieldset>
+            <div className="form-group">
+              <input
+                onChange={updateUser}
+                type="email"
+                id="email"
+                className="form-control"
+                placeholder="Email address"
+                required
+              />
+            </div>
+          </fieldset>
+          <fieldset>
+            <div className="form-group">
+              <button className="login-btn btn-info" type="submit">
+                Sign up
+              </button>
+            </div>
+          </fieldset>
+        </form>
+        <section className="register-link-container">
+          <Link className="register-link register-link-secondary" to="/login">
+            Log in instead
+          </Link>
+        </section>
+      </div>
     </main>
   );
 };
