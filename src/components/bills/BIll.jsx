@@ -31,17 +31,20 @@ export const Bill = ({ bill, getAndSetBills }) => {
 
   return (
     <section className="bill">
-      {daysDifference === 1 ? (
-        <div className="bill-days-info">
-          {daysDifference}
-          <div>day</div>
-        </div>
-      ) : (
-        <div className="bill-days-info">
-          {daysDifference}
-          <div>days</div>
-        </div>
-      )}
+      <div
+        className={
+          daysDifference <= 0
+            ? "late-bills"
+            : daysDifference >= 1 && daysDifference <= 7
+            ? "upcoming-bills"
+            : daysDifference > 7
+            ? "far-bills"
+            : ""
+        }
+      >
+        {daysDifference}
+        {daysDifference === 1 ? <div>day</div> : <div>days</div>}
+      </div>
 
       <div className="bill-info-section">
         <div className="bill-info-flex">
@@ -57,9 +60,9 @@ export const Bill = ({ bill, getAndSetBills }) => {
         <div className="bill-amount">${bill.amountDue}</div>
       </div>
 
-      <button id="bill-checkbox" onClick={handleMarkAsPaid}>
+      {/* <button id="bill-checkbox" onClick={handleMarkAsPaid}>
         <i className="material-icons">check_circle</i>
-      </button>
+      </button> */}
     </section>
   );
 };
