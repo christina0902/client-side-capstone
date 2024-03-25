@@ -110,18 +110,29 @@
   text-decoration: none;
 }
 
-.bill-days-info {
+.upcoming-bills,
+.late-bills,
+.far-bills {
   width: 50px;
   height: 50px;
   padding: 10px;
   box-shadow: 0px 3px 4px lightgray;
-  background-color: #38a870;
   display: flex;
   flex-direction: column;
   align-items: center;
   color: white;
 }
 
+.late-bills {
+  background-color: #d32f2f;
+}
+.upcoming-bills {
+  background-color: #fdd835;
+}
+
+.far-bills {
+  background-color: #38a870;
+}
 .bill-account-name {
   margin-bottom: 12px;
 }
