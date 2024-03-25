@@ -22,7 +22,7 @@ export const Bill = ({ bill, getAndSetBills }) => {
       dueDate: bill.dueDate,
       repeatBillId: bill.repeatBillId,
       accountId: bill.accountId,
-      paid: true,
+      paymentDate: new Date().toISOString().split("T")[0],
     };
     setBillAsPaid(paidBill).then(() => {
       getAndSetBills();
@@ -56,10 +56,10 @@ export const Bill = ({ bill, getAndSetBills }) => {
         </div>
         <div className="bill-amount">${bill.amountDue}</div>
       </div>
-      {/* 
+
       <button id="bill-checkbox" onClick={handleMarkAsPaid}>
         <i className="material-icons">check_circle</i>
-      </button> */}
+      </button>
     </section>
   );
 };
