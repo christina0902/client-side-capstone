@@ -214,7 +214,7 @@ export const BillList = ({ currentUser }) => {
           <article className="bills">
             {!paidBills
               ? filterBillsByDate.currentMonth
-                  ?.filter((bill) => bill.paid === false)
+                  ?.filter((bill) => bill.paymentDate === "")
                   .map((bill) => {
                     return (
                       <Bill
@@ -225,7 +225,7 @@ export const BillList = ({ currentUser }) => {
                     );
                   })
               : filterBillsByDate.currentMonth
-                  ?.filter((bill) => bill.paid === true)
+                  ?.filter((bill) => bill.paymentDate !== "")
                   .map((bill) => {
                     return (
                       <Bill
@@ -246,7 +246,7 @@ export const BillList = ({ currentUser }) => {
           <article className="bills">
             {!paidBills
               ? filterBillsByDate.nextMonth
-                  ?.filter((bill) => bill.paid === false)
+                  ?.filter((bill) => bill.paymentDate === "")
                   .map((bill) => {
                     return (
                       <Bill
@@ -257,7 +257,7 @@ export const BillList = ({ currentUser }) => {
                     );
                   })
               : filterBillsByDate.nextMonth
-                  ?.filter((bill) => bill.paid === true)
+                  ?.filter((bill) => bill.paymentDate !== "")
                   .map((bill) => {
                     return (
                       <Bill
@@ -278,7 +278,7 @@ export const BillList = ({ currentUser }) => {
           <article className="bills">
             {!paidBills
               ? filterBillsByDate.secondNextMonth
-                  ?.filter((bill) => bill.paid === false)
+                  ?.filter((bill) => bill.paymentDate === "")
                   .map((bill) => {
                     return (
                       <Bill
@@ -289,7 +289,7 @@ export const BillList = ({ currentUser }) => {
                     );
                   })
               : filterBillsByDate.secondNextMonth
-                  ?.filter((bill) => bill.paid === true)
+                  ?.filter((bill) => bill.paymentDate !== "")
                   .map((bill) => {
                     return (
                       <Bill
