@@ -30,7 +30,7 @@ export const Login = () => {
     <main className="login-flex">
       <section className="container-login">
         <form className="form-login" onSubmit={handleLogin}>
-          <h2 className="login-header">Log in to Bill Tracker</h2>
+          <h2 className="login-header">Welcome to Money Mate</h2>
           <fieldset>
             <div className="form-group">
               <span className="form-label">Email</span>

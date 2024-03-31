@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { setBillAsPaid } from "../../services/billsService";
 
-export const Bill = ({ bill, getAndSetBills }) => {
+export const Bill = ({ bill, getAndSetBills, paidBills }) => {
   const dueDate = new Date(bill.dueDate);
   const date = dueDate.toLocaleDateString("en-US", {
     weekday: "short",
@@ -14,6 +14,8 @@ export const Bill = ({ bill, getAndSetBills }) => {
   const timeDifference = dueDate - currentDate;
 
   const daysDifference = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
+
+  const paymentDate = new Date(bill?.paymentDate);
 
   const handleMarkAsPaid = () => {
     const paidBill = {
@@ -31,20 +33,26 @@ export const Bill = ({ bill, getAndSetBills }) => {
 
   return (
     <section className="bill">
-      <div
-        className={
-          daysDifference <= 0
-            ? "late-bills"
-            : daysDifference >= 1 && daysDifference <= 7
-            ? "upcoming-bills"
-            : daysDifference > 7
-            ? "far-bills"
-            : ""
-        }
-      >
-        {daysDifference}
-        {daysDifference === 1 ? <div>day</div> : <div>days</div>}
-      </div>
+      {!paidBills ? (
+        <div
+          className={
+            daysDifference <= 0
+              ? "late-bills"
+              : daysDifference >= 1 && daysDifference <= 7
+              ? "upcoming-bills"
+              : daysDifference > 7
+              ? "far-bills"
+              : ""
+          }
+        >
+          {daysDifference}
+          {daysDifference === 1 ? <div>day</div> : <div>days</div>}
+        </div>
+      ) : (
+        <div className={paymentDate <= dueDate ? "paid-ontime" : "paid-late"}>
+          {paymentDate <= dueDate ? "Paid On Time" : "Paid Late"}
+        </div>
+      )}
 
       <div className="bill-info-section">
         <div className="bill-info-flex">

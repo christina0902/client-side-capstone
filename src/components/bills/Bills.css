@@ -11,7 +11,19 @@
   margin-bottom: 5px;
   color: white;
 }
-
+.bill-footer-bar {
+  background-color: #186b8b;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
+  width: 800px;
+  height: 15px;
+  padding: 10px;
+  box-shadow: 0px 3px 4px lightgray;
+  margin-bottom: 5px;
+  color: white;
+}
 .bills-header {
   margin: auto;
   margin-bottom: 80px;
@@ -112,7 +124,9 @@
 
 .upcoming-bills,
 .late-bills,
-.far-bills {
+.far-bills,
+.paid-late,
+.paid-ontime {
   width: 50px;
   height: 50px;
   padding: 10px;
@@ -120,19 +134,28 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   color: white;
 }
 
-.late-bills {
-  background-color: #d32f2f;
-}
-.upcoming-bills {
-  background-color: #fdd835;
+.paid-late,
+.paid-ontime {
+  text-align: center;
 }
 
-.far-bills {
+.late-bills,
+.paid-late {
+  background-color: #fe7067;
+}
+.upcoming-bills {
+  background-color: #f8e35f;
+}
+
+.far-bills,
+.paid-ontime {
   background-color: #38a870;
 }
+
 .bill-account-name {
   margin-bottom: 12px;
 }
