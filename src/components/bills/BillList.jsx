@@ -4,6 +4,7 @@ import { Bill } from "./BIll";
 import { BillHeaderBar } from "./BillHeaderBar";
 import "./Bills.css";
 import { Link } from "react-router-dom";
+import { BillFooterBar } from "./BillFooterBar";
 
 export const BillList = ({ currentUser }) => {
   const [allBills, setAllBills] = useState([]);
@@ -220,6 +221,7 @@ export const BillList = ({ currentUser }) => {
                       <Bill
                         key={bill.id}
                         bill={bill}
+                        paidBills={paidBills}
                         getAndSetBills={getAndSetBills}
                       />
                     );
@@ -231,6 +233,7 @@ export const BillList = ({ currentUser }) => {
                       <Bill
                         key={bill.id}
                         bill={bill}
+                        paidBills={paidBills}
                         getAndSetBills={getAndSetBills}
                       />
                     );
@@ -252,6 +255,7 @@ export const BillList = ({ currentUser }) => {
                       <Bill
                         key={bill.id}
                         bill={bill}
+                        paidBills={paidBills}
                         getAndSetBills={getAndSetBills}
                       />
                     );
@@ -263,6 +267,7 @@ export const BillList = ({ currentUser }) => {
                       <Bill
                         key={bill.id}
                         bill={bill}
+                        paidBills={paidBills}
                         getAndSetBills={getAndSetBills}
                       />
                     );
@@ -284,6 +289,7 @@ export const BillList = ({ currentUser }) => {
                       <Bill
                         key={bill.id}
                         bill={bill}
+                        paidBills={paidBills}
                         getAndSetBills={getAndSetBills}
                       />
                     );
@@ -295,11 +301,20 @@ export const BillList = ({ currentUser }) => {
                       <Bill
                         key={bill.id}
                         bill={bill}
+                        paidBills={paidBills}
                         getAndSetBills={getAndSetBills}
                       />
                     );
                   })}
           </article>
+        </div>
+      </div>
+      <div className="bill-footer-container">
+        <div>
+          <BillFooterBar
+            combinedMonths={filterBillsByDate}
+            paidBills={paidBills}
+          />
         </div>
       </div>
     </div>
