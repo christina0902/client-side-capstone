@@ -1,9 +1,9 @@
 import { Link, useNavigate } from "react-router-dom";
 import { BillOptionsDropDown } from "./BillOptionsDropDown";
 import { useState } from "react";
-// import { createAccount } from "../../services/accountsService";
 import { createBill } from "../../services/billsService";
 import { AccountOptionsDropDown } from "./AccountNameDropDown";
+import { calculateNewDueDate } from "../bills/CalculateNewDueDates";
 
 export const CreateNewBillForm = ({ currentUser }) => {
   const [newBill, setNewBill] = useState({
@@ -30,10 +30,31 @@ export const CreateNewBillForm = ({ currentUser }) => {
         paid: false,
       };
 
-      createBill(createdBill).then(() => {
-        navigate("/bills");
+      createBill(createdBill).then((newlyPostedBill) => {
+        if (
+          newlyPostedBill.hasOwnProperty("id") &&
+          newlyPostedBill.repeatBillId > 1
+        ) {
+          const newDueDates = calculateNewDueDate(
+            newlyPostedBill?.dueDate,
+            newlyPostedBill?.repeatBillId
+          );
+
+          newDueDates.forEach((dueDate) => {
+            const repeatedBillInstance = {
+              ...newlyPostedBill,
+              dueDate,
+              originalBillId: newlyPostedBill.id,
+            };
+            delete repeatedBillInstance.id;
+            createBill(repeatedBillInstance);
+          });
+        } else {
+          navigate("/bills");
+        }
       });
     }
+    navigate("/bills");
   };
 
   return (
@@ -76,6 +97,7 @@ export const CreateNewBillForm = ({ currentUser }) => {
           <input
             name="amountDue"
             type="number"
+            step={0.01}
             placeholder="0.00"
             className="form-control"
             onChange={handleInputChange}

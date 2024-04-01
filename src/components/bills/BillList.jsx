@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getAllBills } from "../../services/billsService";
+import { createBill, getAllBills } from "../../services/billsService";
 import { Bill } from "./BIll";
 import { BillHeaderBar } from "./BillHeaderBar";
 import "./Bills.css";
@@ -15,28 +15,16 @@ export const BillList = ({ currentUser }) => {
     getAndSetBills();
   }, []);
 
+  // 1, Get all bills regardless of owner,
+  // 2, filter through those bills and get only bills(Original) belonging to the current user.
+  // 3, Check if the OriginalBill has a repeatBillId that is greater than 1. Calculate New Duedates.
+  // 4, After checking if the bill does not already exist within your database POST that repeat bill.
+  // 5, If you created a new bill. Push that into your filtered bills, (Filtered Bills will have both Original Bills, and RepeatedBills(New) and RepeatedBills(Old/Already In Database)   )
+
+  // This is the function that gets all bills, and creates repeated bills based on those
   const getAndSetBills = () => {
     getAllBills().then((billsArray) => {
-      const allBillsWithRepeats = [];
-
-      billsArray.forEach((bill) => {
-        if (bill.repeatBillId > 1) {
-          const newDueDates = calculateNewDueDate(
-            bill.dueDate,
-            bill.repeatBillId
-          );
-
-          allBillsWithRepeats.push(bill);
-
-          newDueDates.forEach((dueDate) => {
-            const repeatedBillInstance = { ...bill, dueDate };
-            allBillsWithRepeats.push(repeatedBillInstance);
-          });
-        } else {
-          allBillsWithRepeats.push(bill);
-        }
-      });
-      setAllBills(allBillsWithRepeats);
+      setAllBills(billsArray);
     });
   };
 

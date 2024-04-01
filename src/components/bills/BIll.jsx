@@ -57,12 +57,14 @@ export const Bill = ({ bill, getAndSetBills }) => {
           </div>
           <div className="bill-due-date">{date}</div>
         </div>
-        <div className="bill-amount">${bill.amountDue}</div>
+        <div className="bill-amount">
+          ${parseFloat(bill.amountDue?.toFixed(2))}
+        </div>
       </div>
-      {/* 
+
       <button id="bill-checkbox" onClick={handleMarkAsPaid}>
         <i className="material-icons">check_circle</i>
-      </button> */}
+      </button>
     </section>
   );
 };

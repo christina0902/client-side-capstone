@@ -41,8 +41,8 @@ export const deleteBill = async (billId) => {
   });
 };
 
-export const createBill = async (bill) => {
-  return await fetch("http://localhost:8088/bills", {
+export const createBill = (bill) => {
+  return fetch("http://localhost:8088/bills", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

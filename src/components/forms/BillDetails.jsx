@@ -34,7 +34,7 @@ export const BillDetails = () => {
     event.preventDefault();
     const updatedBill = {
       id: parseInt(billId),
-      amountDue: parseInt(bill.amountDue),
+      amountDue: parseFloat(bill.amountDue),
       dueDate: bill.dueDate,
       repeatBillId: parseInt(bill.repeatBillId),
       accountId: bill.accountId,
