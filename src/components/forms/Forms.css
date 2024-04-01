@@ -10,20 +10,45 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 50%;
+  width: 30%;
   margin: auto;
+  margin-top: 8%;
 }
 .form-btn-secondary {
-  background: none;
   padding: 0.5rem;
-  border-radius: 4%;
-  width: 100px;
+  border-radius: 5%;
+  width: 150px;
+  height: 50px;
+  font-size: large;
+  border-width: 3px;
 }
-.form-btn-secondary:hover {
-  background-color: lightgrey;
+
+.cancel-btn {
+  background-color: #39a870;
+  color: white;
+  border-color: #39a870;
+}
+
+.cancel-btn:hover {
+  border-color: #39a870;
+  color: #39a870;
+  background-color: white;
+}
+
+.save-btn:hover {
+  background-color: #39a870;
+  color: white;
+  border: none;
+}
+
+.save-btn {
+  border-color: #39a870;
+  color: #39a870;
+  background-color: white;
 }
 .form-label {
   font-weight: bold;
+  color: #186b8b;
 }
 
 select.form-control {
@@ -48,3 +73,17 @@ select.form-control {
   top: 2px;
   position: relative;
 }
+
+.form-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 30px;
+  height: 50px;
+}
+
+/* .bill-form-title {
+  background-color: #186b8b;
+} */
