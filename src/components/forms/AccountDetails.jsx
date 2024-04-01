@@ -51,37 +51,44 @@ export const AccountDetails = () => {
   };
   return (
     <form className="view-account">
-      {!editAccount ? <h2>Account Details</h2> : <h2>Update Account</h2>}
-      <fieldset>
-        <div className="form-btns">
-          <div className="form-group">
-            <Link to="/accounts">
-              <button className="form-btn-secondary">Cancel</button>
-            </Link>
-          </div>
-          {!editAccount ? (
+      <div className="form-header">
+        <fieldset>
+          <div className="form-btns">
             <div className="form-group">
-              <button
-                className="form-btn-secondary"
-                onClick={(event) => {
-                  event.preventDefault();
-                  setEditAccount(true);
-                }}
-              >
-                Edit
-              </button>
-            </div>
-          ) : (
-            <div className="form-group">
-              <Link>
-                <button className="form-btn-secondary" onClick={handleSave}>
-                  Save
+              <Link to="/accounts">
+                <button className="form-btn-secondary cancel-btn">
+                  Cancel
                 </button>
               </Link>
             </div>
-          )}
-        </div>
-      </fieldset>
+            {!editAccount ? <h2>Account Details</h2> : <h2>Update Account</h2>}
+            {!editAccount ? (
+              <div className="form-group">
+                <button
+                  className="form-btn-secondary edit-btn"
+                  onClick={(event) => {
+                    event.preventDefault();
+                    setEditAccount(true);
+                  }}
+                >
+                  Edit
+                </button>
+              </div>
+            ) : (
+              <div className="form-group">
+                <Link>
+                  <button
+                    className="form-btn-secondary save-btn"
+                    onClick={handleSave}
+                  >
+                    Save
+                  </button>
+                </Link>
+              </div>
+            )}
+          </div>
+        </fieldset>
+      </div>
       <fieldset>
         <div className="form-group">
           <label className="form-label">Account Name</label>

@@ -28,21 +28,25 @@ export const CreateNewAccountForm = ({ currentUser }) => {
 
   return (
     <form className="create-bill" onSubmit={handleSave}>
-      <h2>Create New Account</h2>
-      <fieldset>
-        <div className="form-btns">
-          <div className="form-group">
-            <Link to="/accounts">
-              <button className="form-btn-secondary">Cancel</button>
-            </Link>
+      <div className="form-header">
+        <fieldset>
+          <div className="form-btns">
+            <div className="form-group">
+              <Link to="/accounts">
+                <button className="form-btn-secondary cancel-btn">
+                  Cancel
+                </button>
+              </Link>
+            </div>
+            <h2>Create New Account</h2>
+            <div className="form-group">
+              <button className="form-btn-secondary save-btn" type="submit">
+                Save
+              </button>
+            </div>
           </div>
-          <div className="form-group">
-            <button className="form-btn-secondary" type="submit">
-              Save
-            </button>
-          </div>
-        </div>
-      </fieldset>
+        </fieldset>
+      </div>
       <fieldset>
         <div className="form-group">
           <label className="form-label">Account Name</label>
