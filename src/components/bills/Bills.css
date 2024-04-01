@@ -72,7 +72,8 @@
 .bills-container {
   display: flex;
   flex-direction: column;
-  margin-top: 80px;
+  margin-top: 15px;
+  margin-bottom: 80px;
 }
 .add-bill-btn {
   border: none;

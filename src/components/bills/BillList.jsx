@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getAllBills } from "../../services/billsService";
+import { createBill, getAllBills } from "../../services/billsService";
 import { Bill } from "./BIll";
 import { BillHeaderBar } from "./BillHeaderBar";
 import "./Bills.css";
@@ -16,25 +16,16 @@ export const BillList = ({ currentUser }) => {
     getAndSetBills();
   }, []);
 
+  // 1, Get all bills regardless of owner,
+  // 2, filter through those bills and get only bills(Original) belonging to the current user.
+  // 3, Check if the OriginalBill has a repeatBillId that is greater than 1. Calculate New Duedates.
+  // 4, After checking if the bill does not already exist within your database POST that repeat bill.
+  // 5, If you created a new bill. Push that into your filtered bills, (Filtered Bills will have both Original Bills, and RepeatedBills(New) and RepeatedBills(Old/Already In Database)   )
+
+  // This is the function that gets all bills, and creates repeated bills based on those
   const getAndSetBills = () => {
     getAllBills().then((billsArray) => {
-      const repeatedBills = [];
-
-      billsArray.forEach((bill) => {
-        if (bill.repeatBillId) {
-          const newDueDates = calculateNewDueDate(
-            bill.dueDate,
-            bill.repeatBillId
-          );
-          newDueDates.forEach((dueDate) => {
-            const repeatedBillInstance = { ...bill, dueDate };
-            repeatedBills.push(repeatedBillInstance);
-          });
-        } else {
-          repeatedBills.push(bill);
-        }
-      });
-      setAllBills(repeatedBills);
+      setAllBills(billsArray);
     });
   };
 
@@ -101,65 +92,61 @@ export const BillList = ({ currentUser }) => {
     const dueDates = [];
     const currentDate = new Date(dueDate);
 
-    if (repeatBillId === 1) {
-      dueDates.push(currentDate.toISOString().split("T")[0]);
-    } else {
-      for (let i = 0; i < 50; i++) {
-        switch (repeatBillId) {
-          case 2:
-            currentDate.setDate(currentDate.getDate() + 7);
-            break;
-          case 3:
-            currentDate.setDate(currentDate.getDate() + 14);
-            break;
-          case 4:
-            currentDate.setDate(currentDate.getDate() + 21);
-            break;
-          case 5:
-            currentDate.setDate(currentDate.getDate() + 28);
-            break;
-          case 6:
-            const dayOfMonth = currentDate.getDate();
-            if (dayOfMonth < 15) {
-              currentDate.setDate(15);
-            } else {
-              currentDate.setMonth(currentDate.getMonth() + 1);
-              currentDate.setDate(1);
-            }
-            break;
-          case 7:
+    for (let i = 0; i < 50; i++) {
+      switch (repeatBillId) {
+        case 2:
+          currentDate.setDate(currentDate.getDate() + 7);
+          break;
+        case 3:
+          currentDate.setDate(currentDate.getDate() + 14);
+          break;
+        case 4:
+          currentDate.setDate(currentDate.getDate() + 21);
+          break;
+        case 5:
+          currentDate.setDate(currentDate.getDate() + 28);
+          break;
+        case 6:
+          const dayOfMonth = currentDate.getDate();
+          if (dayOfMonth < 15) {
+            currentDate.setDate(15);
+          } else {
             currentDate.setMonth(currentDate.getMonth() + 1);
-            break;
-          case 8:
-            currentDate.setMonth(currentDate.getMonth() + 2);
-            break;
-          case 9:
-            currentDate.setMonth(currentDate.getMonth() + 3);
-            break;
-          case 10:
-            currentDate.setMonth(currentDate.getMonth() + 4);
-            break;
-          case 11:
-            currentDate.setMonth(currentDate.getMonth() + 6);
-            break;
-          case 12:
-            currentDate.setFullYear(currentDate.getFullYear() + 1);
-            break;
-          case 13:
-            currentDate.setFullYear(currentDate.getFullYear() + 2);
-            break;
-          case 14:
-            currentDate.setFullYear(currentDate.getFullYear() + 3);
-            break;
-          case 15:
-            currentDate.setFullYear(currentDate.getFullYear() + 4);
-            break;
-          case 16:
-            currentDate.setFullYear(currentDate.getFullYear() + 5);
-            break;
-        }
-        dueDates.push(currentDate.toISOString().split("T")[0]);
+            currentDate.setDate(1);
+          }
+          break;
+        case 7:
+          currentDate.setMonth(currentDate.getMonth() + 1);
+          break;
+        case 8:
+          currentDate.setMonth(currentDate.getMonth() + 2);
+          break;
+        case 9:
+          currentDate.setMonth(currentDate.getMonth() + 3);
+          break;
+        case 10:
+          currentDate.setMonth(currentDate.getMonth() + 4);
+          break;
+        case 11:
+          currentDate.setMonth(currentDate.getMonth() + 6);
+          break;
+        case 12:
+          currentDate.setFullYear(currentDate.getFullYear() + 1);
+          break;
+        case 13:
+          currentDate.setFullYear(currentDate.getFullYear() + 2);
+          break;
+        case 14:
+          currentDate.setFullYear(currentDate.getFullYear() + 3);
+          break;
+        case 15:
+          currentDate.setFullYear(currentDate.getFullYear() + 4);
+          break;
+        case 16:
+          currentDate.setFullYear(currentDate.getFullYear() + 5);
+          break;
       }
+      dueDates.push(currentDate.toISOString().split("T")[0]);
     }
     return dueDates;
   };
@@ -219,7 +206,7 @@ export const BillList = ({ currentUser }) => {
                   .map((bill) => {
                     return (
                       <Bill
-                        key={bill.id}
+                        key={`${bill.id} ${bill.dueDate}`}
                         bill={bill}
                         paidBills={paidBills}
                         getAndSetBills={getAndSetBills}
@@ -231,7 +218,7 @@ export const BillList = ({ currentUser }) => {
                   .map((bill) => {
                     return (
                       <Bill
-                        key={bill.id}
+                        key={`${bill.id} ${bill.dueDate}`}
                         bill={bill}
                         paidBills={paidBills}
                         getAndSetBills={getAndSetBills}
@@ -253,7 +240,7 @@ export const BillList = ({ currentUser }) => {
                   .map((bill) => {
                     return (
                       <Bill
-                        key={bill.id}
+                        key={`${bill.id} ${bill.dueDate}`}
                         bill={bill}
                         paidBills={paidBills}
                         getAndSetBills={getAndSetBills}
@@ -265,7 +252,7 @@ export const BillList = ({ currentUser }) => {
                   .map((bill) => {
                     return (
                       <Bill
-                        key={bill.id}
+                        key={`${bill.id} ${bill.dueDate}`}
                         bill={bill}
                         paidBills={paidBills}
                         getAndSetBills={getAndSetBills}
@@ -287,7 +274,7 @@ export const BillList = ({ currentUser }) => {
                   .map((bill) => {
                     return (
                       <Bill
-                        key={bill.id}
+                        key={`${bill.id} ${bill.dueDate}`}
                         bill={bill}
                         paidBills={paidBills}
                         getAndSetBills={getAndSetBills}
@@ -299,7 +286,7 @@ export const BillList = ({ currentUser }) => {
                   .map((bill) => {
                     return (
                       <Bill
-                        key={bill.id}
+                        key={`${bill.id} ${bill.dueDate}`}
                         bill={bill}
                         paidBills={paidBills}
                         getAndSetBills={getAndSetBills}
