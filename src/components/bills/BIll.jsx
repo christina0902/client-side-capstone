@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { setBillAsPaid } from "../../services/billsService";
 
-export const Bill = ({ bill, getAndSetBills }) => {
+export const Bill = ({ bill, getAndSetBills, paidBills }) => {
   const dueDate = new Date(bill.dueDate);
   const date = dueDate.toLocaleDateString("en-US", {
     weekday: "short",
@@ -15,6 +15,8 @@ export const Bill = ({ bill, getAndSetBills }) => {
 
   const daysDifference = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
 
+  const paymentDate = new Date(bill?.paymentDate);
+
   const handleMarkAsPaid = () => {
     const paidBill = {
       id: bill.id,
@@ -22,7 +24,7 @@ export const Bill = ({ bill, getAndSetBills }) => {
       dueDate: bill.dueDate,
       repeatBillId: bill.repeatBillId,
       accountId: bill.accountId,
-      paid: true,
+      paymentDate: new Date().toISOString().split("T")[0],
     };
     setBillAsPaid(paidBill).then(() => {
       getAndSetBills();
@@ -31,15 +33,24 @@ export const Bill = ({ bill, getAndSetBills }) => {
 
   return (
     <section className="bill">
-      {daysDifference === 1 ? (
-        <div className="bill-days-info">
+      {!paidBills ? (
+        <div
+          className={
+            daysDifference <= 0
+              ? "late-bills"
+              : daysDifference >= 1 && daysDifference <= 7
+              ? "upcoming-bills"
+              : daysDifference > 7
+              ? "far-bills"
+              : ""
+          }
+        >
           {daysDifference}
-          <div>day</div>
+          {daysDifference === 1 ? <div>day</div> : <div>days</div>}
         </div>
       ) : (
-        <div className="bill-days-info">
-          {daysDifference}
-          <div>days</div>
+        <div className={paymentDate <= dueDate ? "paid-ontime" : "paid-late"}>
+          {paymentDate <= dueDate ? "Paid On Time" : "Paid Late"}
         </div>
       )}
 
@@ -62,7 +73,9 @@ export const Bill = ({ bill, getAndSetBills }) => {
         </div>
       </div>
 
-      <button id="bill-checkbox" onClick={handleMarkAsPaid}>
+
+
+      {/* <button id="bill-checkbox" onClick={handleMarkAsPaid}>
         <i className="material-icons">check_circle</i>
       </button>
     </section>

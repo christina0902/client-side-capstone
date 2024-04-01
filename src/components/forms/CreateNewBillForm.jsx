@@ -27,7 +27,7 @@ export const CreateNewBillForm = ({ currentUser }) => {
         dueDate: newBill.dueDate,
         repeatBillId: parseInt(newBill.repeatBillId),
         accountId: parseInt(newBill.accountId),
-        paid: false,
+        paymentDate: "",
       };
 
       createBill(createdBill).then((newlyPostedBill) => {

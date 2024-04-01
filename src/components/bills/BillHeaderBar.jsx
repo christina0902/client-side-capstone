@@ -7,11 +7,11 @@ export const BillHeaderBar = ({ monthSetter, monthArray, paidBills }) => {
   });
 
   const totalPaid = monthArray
-    ?.filter((bill) => bill.paid === true)
+    ?.filter((bill) => bill.paymentDate !== "")
     .reduce((accumulator, bill) => accumulator + bill.amountDue, 0);
 
   const totalUnpaid = monthArray
-    ?.filter((bill) => bill.paid === false)
+    ?.filter((bill) => bill.paymentDate === "")
     .reduce((accumulator, bill) => accumulator + bill.amountDue, 0);
 
   return (

@@ -4,6 +4,7 @@ import { Bill } from "./BIll";
 import { BillHeaderBar } from "./BillHeaderBar";
 import "./Bills.css";
 import { Link } from "react-router-dom";
+import { BillFooterBar } from "./BillFooterBar";
 
 export const BillList = ({ currentUser }) => {
   const [allBills, setAllBills] = useState([]);
@@ -201,23 +202,25 @@ export const BillList = ({ currentUser }) => {
           <article className="bills">
             {!paidBills
               ? filterBillsByDate.currentMonth
-                  ?.filter((bill) => bill.paid === false)
+                  ?.filter((bill) => bill.paymentDate === "")
                   .map((bill) => {
                     return (
                       <Bill
                         key={`${bill.id} ${bill.dueDate}`}
                         bill={bill}
+                        paidBills={paidBills}
                         getAndSetBills={getAndSetBills}
                       />
                     );
                   })
               : filterBillsByDate.currentMonth
-                  ?.filter((bill) => bill.paid === true)
+                  ?.filter((bill) => bill.paymentDate !== "")
                   .map((bill) => {
                     return (
                       <Bill
                         key={`${bill.id} ${bill.dueDate}`}
                         bill={bill}
+                        paidBills={paidBills}
                         getAndSetBills={getAndSetBills}
                       />
                     );
@@ -233,23 +236,25 @@ export const BillList = ({ currentUser }) => {
           <article className="bills">
             {!paidBills
               ? filterBillsByDate.nextMonth
-                  ?.filter((bill) => bill.paid === false)
+                  ?.filter((bill) => bill.paymentDate === "")
                   .map((bill) => {
                     return (
                       <Bill
                         key={`${bill.id} ${bill.dueDate}`}
                         bill={bill}
+                        paidBills={paidBills}
                         getAndSetBills={getAndSetBills}
                       />
                     );
                   })
               : filterBillsByDate.nextMonth
-                  ?.filter((bill) => bill.paid === true)
+                  ?.filter((bill) => bill.paymentDate !== "")
                   .map((bill) => {
                     return (
                       <Bill
                         key={`${bill.id} ${bill.dueDate}`}
                         bill={bill}
+                        paidBills={paidBills}
                         getAndSetBills={getAndSetBills}
                       />
                     );
@@ -265,28 +270,38 @@ export const BillList = ({ currentUser }) => {
           <article className="bills">
             {!paidBills
               ? filterBillsByDate.secondNextMonth
-                  ?.filter((bill) => bill.paid === false)
+                  ?.filter((bill) => bill.paymentDate === "")
                   .map((bill) => {
                     return (
                       <Bill
                         key={`${bill.id} ${bill.dueDate}`}
                         bill={bill}
+                        paidBills={paidBills}
                         getAndSetBills={getAndSetBills}
                       />
                     );
                   })
               : filterBillsByDate.secondNextMonth
-                  ?.filter((bill) => bill.paid === true)
+                  ?.filter((bill) => bill.paymentDate !== "")
                   .map((bill) => {
                     return (
                       <Bill
                         key={`${bill.id} ${bill.dueDate}`}
                         bill={bill}
+                        paidBills={paidBills}
                         getAndSetBills={getAndSetBills}
                       />
                     );
                   })}
           </article>
+        </div>
+      </div>
+      <div className="bill-footer-container">
+        <div>
+          <BillFooterBar
+            combinedMonths={filterBillsByDate}
+            paidBills={paidBills}
+          />
         </div>
       </div>
     </div>

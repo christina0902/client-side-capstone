@@ -38,7 +38,7 @@ export const BillDetails = () => {
       dueDate: bill.dueDate,
       repeatBillId: parseInt(bill.repeatBillId),
       accountId: bill.accountId,
-      paid: bill.paid,
+      paymentDate: bill.paymentDate,
     };
     updateBill(updatedBill).then(() => {
       navigate("/bills");
