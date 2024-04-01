@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 }
 
 .create-bill,
@@ -12,18 +13,48 @@
   align-items: center;
   width: 50%;
   margin: auto;
+  margin-top: 8%;
 }
 .form-btn-secondary {
-  background: none;
   padding: 0.5rem;
-  border-radius: 4%;
-  width: 100px;
+  border-radius: 5%;
+  width: 150px;
+  height: 50px;
+  font-size: large;
+  border-width: 3px;
 }
-.form-btn-secondary:hover {
-  background-color: lightgrey;
+
+.cancel-btn {
+  background-color: #39a870;
+  color: white;
+  border-color: #39a870;
+}
+
+.cancel-btn:hover {
+  border-color: #39a870;
+  color: #39a870;
+  background-color: white;
+}
+
+.save-btn:hover {
+  background-color: #39a870;
+  color: white;
+  border-color: #39a870;
+}
+.edit-btn:hover {
+  background-color: #39a870;
+  color: white;
+  border-color: #39a870;
+}
+.save-btn,
+.edit-btn {
+  border-color: #39a870;
+  color: #39a870;
+  background-color: white;
 }
 .form-label {
   font-weight: bold;
+  color: #186b8b;
 }
 
 select.form-control {
@@ -35,16 +66,29 @@ select.form-control {
 .form-btn-primary {
   background-color: #f6665f;
   width: 200px;
-  margin-left: 40%;
+  margin-left: 39%;
+  justify-content: center;
   height: 50px;
-  font-weight: bold;
-  font-size: 1rem;
+  /* font-weight: bold; */
+  font-size: large;
   border: none;
   margin-top: 10px;
-  border: solid black;
+  border: solid #f6665f;
   border-width: thin;
+  color: white;
+  border-radius: 4px;
 }
 .form-btn-primary:active {
   top: 2px;
   position: relative;
+}
+
+.form-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 30px;
+  height: 50px;
 }
