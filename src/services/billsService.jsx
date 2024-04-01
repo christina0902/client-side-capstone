@@ -3,8 +3,8 @@ export const getAllBills = async () => {
     (res) => res.json()
   );
 };
-export const setBillAsPaid = (bill) => {
-  return fetch(`http://localhost:8088/bills/${bill.id}`, {
+export const setBillAsPaid = async (bill) => {
+  return await fetch(`http://localhost:8088/bills/${bill.id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -35,14 +35,14 @@ export const updateBill = async (bill) => {
   });
 };
 
-export const deleteBill = (billId) => {
-  return fetch(`http://localhost:8088/bills/${billId}`, {
+export const deleteBill = async (billId) => {
+  return await fetch(`http://localhost:8088/bills/${billId}`, {
     method: "DELETE",
   });
 };
 
-export const createBill = async (bill) => {
-  return await fetch("http://localhost:8088/bills", {
+export const createBill = (bill) => {
+  return fetch("http://localhost:8088/bills", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

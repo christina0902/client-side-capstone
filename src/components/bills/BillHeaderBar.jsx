@@ -17,7 +17,11 @@ export const BillHeaderBar = ({ monthSetter, monthArray, paidBills }) => {
   return (
     <div className="bill-header-bar">
       <div>{monthAndYear}</div>
-      {paidBills ? <div>${totalPaid}</div> : <div>${totalUnpaid}</div>}
+      {paidBills ? (
+        <div>${parseFloat(totalPaid?.toFixed(2))}</div>
+      ) : (
+        <div>${parseFloat(totalUnpaid?.toFixed(2))}</div>
+      )}
     </div>
   );
 };
